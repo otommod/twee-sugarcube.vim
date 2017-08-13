@@ -142,6 +142,7 @@ if !exists("main_syntax")
   let main_syntax = 'twee'
 endif
 
+syn keyword tweeBoolean     contained true false
 syn match   tweeNumber      contained '\d\+'
 syn region  tweeString      contained start=+'+  skip=+\\\\\|\\'+  end=+'+ oneline
 syn region  tweeString      contained start=+"+  skip=+\\\\\|\\"+  end=+"+ oneline
@@ -154,7 +155,7 @@ syn match   tweeVariable              '$[$_a-zA-Z][$_0-9a-zA-Z]*'
 syn match   tweeVariable              '_[$a-zA-Z][$_0-9a-zA-Z]*'
 
 syn region  tweeEndMacro              start=+<</+ end=+>>+ contains=tweeMacroName
-syn region  tweeMacro                 start=+<<+  end=+>>+ contains=tweeMacroName,tweeVariable,tweeNumber,tweeString,tweeOperator
+syn region  tweeMacro                 start=+<<+  end=+>>+ contains=tweeMacroName,tweeVariable,tweeBoolean,tweeNumber,tweeString,tweeOperator
 syn match   tweeMacroName   contained '<<\s*[=-]'ms=s+2
 syn match   tweeMacroName   contained '<<\s*[a-zA-Z][-_0-9a-zA-Z]*'ms=s+2
 syn match   tweeMacroName   contained '<</\s*[=-]'ms=s+3
@@ -169,7 +170,7 @@ syn region  tweeLink                  start=+\[\[+ end=+\]\]+
 " syn match   tweeLinkText    contained '.*|'me=e-1
 " syn match   tweeLinkText    contained '.*->'me=e-2
 " syn match   tweeLinkText    contained '<-.*'ms=s+2
-" syn region  tweeLinkSetter  contained start=+\[+ end=+\]+ contains=tweeVariable,tweeNumber,tweeString
+" syn region  tweeLinkSetter  contained start=+\[+ end=+\]+ contains=tweeVariable,tweeBoolean,tweeNumber,tweeString
 
 syn region  tweeComment               start=+/%+ end=+%/+ contains=tweeTodo
 syn region  tweeComment               start=+/\*+ end=+\*/+ contains=tweeTodo
@@ -203,6 +204,7 @@ syn region  tweeUnderlineItalicBold     contained start=+''+ end=+''+ contains=@
 
 "
 " Highlight colors
+hi def link tweeBoolean     Boolean
 hi def link tweeNumber      Number
 hi def link tweeString      String
 hi def link tweeOperator    Operator
